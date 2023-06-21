@@ -1,0 +1,43 @@
+import random
+
+listOfWords = ["british", "suave", "integrity", "accent", "evil", "genius", "downton"]
+
+wordChosen = random.choice(listOfWords)
+guessedLetters = []
+lives = 6
+
+print(f"For Testing, the word is {wordChosen}")
+print("------------------")
+
+
+def letterCheck(letter):
+  occurances = 0
+  for i in wordChosen:
+    if i == letter:
+      occurances += 1
+  return occurances
+
+
+def printStatus():
+  lCorrect = 0
+  for letter in wordChosen:
+    if letter in guessedLetters:
+      print(f"{letter}", end="")
+      lCorrect += 1
+      if lCorrect == len(wordChosen):
+        print()
+        print("All letters guessed! You have won!!")
+        exit(0)
+    else:
+      print("_", end="")
+
+
+while lives > 0:
+  guess = input("Choose a letter ")
+  if letterCheck(guess) == 0:
+    lives = lives - 1
+    print(f"Not in Word, you have {lives} guesses remaining")
+  elif letterCheck(guess) > 0:
+    guessedLetters.append(guess)
+    print("Correct! That letter is in the word")
+    printStatus()
