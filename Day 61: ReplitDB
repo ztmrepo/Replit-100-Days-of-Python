@@ -1,0 +1,50 @@
+from replit import db
+import datetime
+
+
+def printAll():
+  keys = db.keys()
+  for key in keys:
+    print(f"""{key}: {db[key]}""")
+  print("-----------------------")
+
+
+def addTweet():
+  tweet = input("What is your tweet? ")
+  timestamp = datetime.datetime.now()
+  db[timestamp] = tweet
+  print("Tweet Added!")
+
+
+def viewTweet():
+  counter = 0
+  keys = db.prefix("2023-06-23")
+  keys = keys[::-1] #Reverses array to make descending
+
+  for key in keys:
+    print(f"""{key}: {db[key]}""")
+    counter += 1
+    if counter % 3 == 0:  #Viewing three at a time
+      choice = input("Do you wish to exit?")
+      if choice.strip().lower()[0] == "y":
+        break
+
+
+#---Main
+
+while True:
+  print("Welcome to miniTwitter")
+  print("1: Add Tweet")
+  print("2: View Tweets")
+  print("----------------------")
+
+  choice = int(input("> "))
+  if choice == 1:
+    addTweet()
+  elif choice == 2:
+    viewTweet()
+  else:
+    print("Invalid Input!")
+  exit = input("Exit? y/n")
+  if exit.strip().lower()[0] == "y":
+    break
