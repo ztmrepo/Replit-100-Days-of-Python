@@ -1,0 +1,26 @@
+class job:
+  jobType = None
+  salary = None
+  hours = None
+  def __init__ (self, jobType, salary, hours):
+    self.jobType = jobType
+    self.salary = salary
+    self.hours = hours
+
+
+class doctor(job):
+  speciality = None
+  
+  def __init__(self, salary, hours, speciality):
+    self.jobType = "Doctor"
+    self.salary = salary
+    self.hours = hours
+    self.speciality = speciality
+  def print(self):
+    print(f"{self.jobType} {self.salary} {self.hours} {self.speciality}")
+
+newD1 = doctor("$250,000", "50", "Pediatrics")
+newD2 = doctor("$500,000", "30", "Neurosurgeon")
+
+newD1.print()
+newD2.print()
